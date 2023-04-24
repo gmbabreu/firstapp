@@ -1,0 +1,39 @@
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #e4e4e4;
+  }
+
+</style>
+  <div class="jumbotron">
+
+    <h1> Transactions</h1>    
+
+    <ul>
+      <li><a href="/transaction">transaction table</a></li>
+    </ul>  
+
+    <table>
+      <tr> 
+        <th>category</th> 
+        <th>amount</th>
+      </tr>
+      <% trans.forEach(item => { %>
+          <tr> 
+            <td><%= item.category %></td>
+            <td><%= item.amount %> </td>
+          </tr> 
+      <% }) %>
+    </table>
+  </div>

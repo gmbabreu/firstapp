@@ -1,0 +1,92 @@
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #e4e4e4;
+  }
+
+  span {
+  border: none;
+  color: white;
+  background-color: #008CBA;
+  padding: 8px 20px;
+  font-size: 10px;
+  margin: 4px 2px;
+
+  }
+</style>
+  <div class="jumbotron">
+
+    <h1> Transactions </h1>    
+    
+    <table>
+    <tr> 
+      <th>
+        <a class="nav-link" href="/transaction/byCategory">
+          <span class="button">Group by category</span>
+        </a>
+      </th>
+      <th>
+        <a class="nav-link" href="?sortBy=category">
+          <span class="button">sort by category</span>
+        </a>
+      </th>
+      <th>
+        <a class="nav-link" href="?sortBy=amount">
+          <span class="button">sort by amount</span>
+        </a>
+      </th>
+      <th>
+        <a class="nav-link" href="?sortBy=description">
+          <span class="button">sort by description</span>
+        </a>
+      </th>
+      <th>
+        <a class="nav-link" href="?sortBy=date">
+          <span class="button">sort by date</span>
+        </a>
+      </th>
+    </tr>
+  </table>
+
+    <table>
+
+      <tr> 
+        <th>description</th>
+        <th>amount</th>
+        <th>category</th> 
+        <th>date</th>
+        <th>delete</th>
+        <th>edit</th>
+      </tr>
+      <% items.forEach(item => { %>
+          <tr> 
+            <td><%= item.description %></td>
+            <td><%= item.amount %> </td>
+            <td><%= item.category %></td>
+            <td><%= item.date %></td>
+            <td><a href="/transaction/remove/<%=item._id %>">X</a></td>
+            <td><a href="/transaction/edit/<%=item._id %>">edit</a></td>
+          </tr> 
+      <% }) %>
+    </table>
+    <br></br>
+    <h2> Add a New Transaction </h2>
+      <form method="post" action="transaction">
+        <input type="text" name="description" placeholder="description"><br>
+        <input  type="text" name="category" placeholder="category"><br>
+        <input  type="text" name="amount" placeholder="amount"> <br>
+        <input  type="text" name="date" placeholder="mm/dd/yyyy"><br>        
+        <input type="submit" value="store">
+    </form>
+  </div>
