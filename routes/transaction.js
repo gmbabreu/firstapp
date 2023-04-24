@@ -97,38 +97,8 @@ router.post('/transactions/updateItem',
 router.get('/transaction/byCategory',
   isLoggedIn,
   async (req, res, next) => {
-      trans = await Item.find({userId:req.user._id})
+      trans = await Item.find({userId:req.user._id}).sort({category:1})
       res.render('category',{trans});
-});
-
-
-router.get('/sortBy', 
-  isLoggedIn,
-  async (req, res, next) => {
-    const show = req.query.show;
-    if (show === 'sortBycategory') {
-      let items = await Item.find({_id:req.params.item}).sort({category:1});
-      res.render('List',items)
-    }
-});
-
-router.get('/transaction/sortBy=category',
-  isLoggedIn,
-  async (req, res, next) => {
-      items = await Item.find({_id:req.params.item}).sort({category:1});
-      res.locals.items = items
-      res.render('sortBy',{items})
-      console.log(items)
-
-});
-
-
-router.get('/transaction?sortBy=amount',
-  isLoggedIn,
-  async (req, res, next) => {
-      items = await Item.find({_id:req.params.item}).sort({amount:-1});
-      res.locals.items = items
-    res.render('sortBy',{items})
 });
 
 
