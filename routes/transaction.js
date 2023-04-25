@@ -43,8 +43,7 @@ router.get('/transaction/',
       else{
         res.locals.items = await Item.find({userId:req.user._id})
         res.render('List');
-      }
-      
+      }    
 });
 
 
@@ -72,12 +71,10 @@ router.get('/transaction/remove/:item',
       res.redirect('/transaction')
 });
 
-router.get('/transaction/edit/:itemId',
+router.get('/transaction/edit/:item',
   isLoggedIn,
   async (req, res, next) => {
-      console.log("inside /transaction/edit/:itemId")
-      const item = 
-       await Item.findById(req.params.itemId);
+      const item = await Item.findById(req.params.item);
       res.locals.item = item
       res.render('edit')
 });
@@ -85,9 +82,9 @@ router.get('/transaction/edit/:itemId',
 router.post('/transactions/updateItem',
   isLoggedIn,
   async (req, res, next) => {
-      const {itemId,decription,amount,category, date} = req.body;
+      const {item,decription,amount,category, date} = req.body;
       await Item.findOneAndUpdate(
-        {_id:itemId},
+        {_id:item},
         {$set: {decription,amount,category, date}} );
       res.redirect('/transaction')
 });
